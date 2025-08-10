@@ -1,0 +1,2 @@
+config ZMK_KEYBOARD_NAME
+    default "IQS5xx Dev Kit"

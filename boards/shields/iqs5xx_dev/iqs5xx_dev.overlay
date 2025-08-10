@@ -1,0 +1,58 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+	chosen {
+		zmk,kscan = &kscan_direct;
+		zmk,matrix-transform = &default_transform;
+	};
+    kscan_direct: kscan_direct {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+
+        input-gpios
+        = <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
+    };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <1>;
+        rows = <1>;
+        map = < RC(0,0) >;
+    };
+
+    tps43_input: tps43_input {
+        compatible = "zmk,input-listener";
+        device = <&tps43>;
+    };
+};
+
+/*
+* SDA: P0.26
+* SCL: P0.27
+*/
+&arduino_i2c {
+    status = "okay";
+    tps43: iqs5xx@74 {
+        status = "okay";
+        compatible = "azoteq,iqs5xx";
+        reg = <0x74>;
+
+        one-finger-tap;
+        press-and-hold;
+        press-and-hold-time = <250>;
+        two-finger-tap;
+
+        scroll;
+        natural-scroll-y;
+        natural-scroll-x;
+
+        bottom-beta = <5>;
+        stationary-threshold = <5>;
+
+        switch-xy;
+
+        reset-gpios = <&arduino_header 14 GPIO_ACTIVE_LOW>; /* P1.10 */
+        rdy-gpios = <&arduino_header 15 GPIO_ACTIVE_HIGH>; /* P1.11 */
+    };
+};

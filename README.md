@@ -1,11 +1,7 @@
-# ZMK Module Template
+# ZMK shield for Azoteq iqs5xx development
 
-This repository contains a template for a ZMK module, as it would most frequently be used. 
+It should be used with arduino-shield-compatible boards.
 
-## Usage
+Pass `-DSHIELD=iqs5xx_dev` to your west build command.
 
-Read through the [ZMK Module Creation](https://zmk.dev/docs/development/module-creation) page for details on how to configure this template.
-
-## More Info
-
-For more info on modules, you can read through  through the [Zephyr modules page](https://docs.zephyrproject.org/3.5.0/develop/modules.html) and [ZMK's page on using modules](https://zmk.dev/docs/features/modules). [Zephyr's west manifest page](https://docs.zephyrproject.org/3.5.0/develop/west/manifest.html#west-manifests) may also be of use.
+Debug level logging over RTT is enabled by default.
